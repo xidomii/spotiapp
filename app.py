@@ -10,11 +10,11 @@ sp = spotipy.Spotify(auth_manager=SpotifyOAuth(
 
 user_id = sp.current_user()['id']
 
-# Playlist erstellen
+
 playlist = sp.user_playlist_create(user=user_id, name='Lieblingssongs', public=False)
 playlist_id = playlist['id']
 
-# Alle gespeicherten Songs abrufen (maximal 2500)
+
 track_uris = []
 limit_per_request = 50
 max_tracks = 2500
@@ -29,9 +29,8 @@ while results and len(track_uris) < max_tracks:
     else:
         break
 
-# Songs in 100er-Chunks hinzufügen
+
 for i in range(0, len(track_uris), 100):
     sp.playlist_add_items(playlist_id, track_uris[i:i+100])
 
 print(f"Playlist 'Lieblingssongs' wurde erstellt und mit {len(track_uris)} Songs gefüllt.")
-# Alle gespeicherten Songs abrufen (maximal 2500)
